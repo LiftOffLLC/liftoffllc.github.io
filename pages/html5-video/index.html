@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+    <link href="http://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet" type="text/css">
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+     <script src="http://vjs.zencdn.net/4.2/video.js"></script>
+</head>
+<body>
+  <h1>Video JS Simple Player Demo</h1>
+
+  <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="320" height="180" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup='{"example_option":true}'>
+      <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+  </video>
+  <button onclick="app.play()">Play</button>
+  <button onclick="app.pause()">Pause</button>
+  <button onclick="app.stop()">Stop</button>
+
+  <h3>Play List</h3>
+
+  <ul id="plContainer"></ul>
+
+  <script>
+    var app = {}; // Sort of namespacing
+    app.p1 = _V_('example_video_1');
+    app.plContainer = $('#plContainer');
+    // Playlist
+    app.pls = [{
+        title: "Ocean",
+        url: "http://video-js.zencoder.com/oceans-clip.mp4",
+        poster: 'http://video-js.zencoder.com/oceans-clip.png'
+    }, {
+        title: "Animation",
+        url: "http://media.w3.org/2010/05/sintel/trailer.mp4",
+        poster: "http://media.w3.org/2010/05/sintel/poster.png"
+    }, {
+        title: 'Ted',
+        url: 'http://video.ted.com/talk/podcast/2013X/None/AndresLozano_2013X-light.mp4',
+        poster: 'http://images.ted.com/images/ted/a94a473fdf524014a80d4bb19a4b159543679fa4_615x461.jpg'
+    }
+    ];
+
+    app.pls.forEach(function (item) {
+        var title = $('<li>').html(item.title)
+            .click(function () {
+            app.changeSource(item)
+        });
+        app.plContainer.append(title);
+    });
+
+    app.changeSource = function (item) {
+        app.p1.pause();
+        setTimeout(function () {
+            app.p1.src(item.url);
+            $(app.p1.el()).find('video').attr('poster', item.poster);
+            setTimeout(function () {
+                // Add some delay to show poster and allow previous js cycle to complete
+                app.p1.play()
+            }, 250);
+        }, 0);
+    }
+
+    app.play = function () {
+        app.p1.play();
+    }
+    app.pause = function () {
+        app.p1.pause();
+    }
+
+    app.stop = function () {
+        app.p1.pause();
+        setTimeout(function () {
+            app.p1.src(app.p1.currentSrc());
+        }, 0);
+    }
+  </script>
+
+</body>
+</html>
