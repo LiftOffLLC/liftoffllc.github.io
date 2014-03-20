@@ -5,15 +5,23 @@
   <title>Document</title>
     <link href="http://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet" type="text/css">
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-     <script src="http://vjs.zencdn.net/4.2/video.js"></script>
+     <script src="video.min.js"></script>
 </head>
 <body>
   <h1>Video JS Simple Player Demo</h1>
 
+  <h3>Original Video</h3>
+
+  <video id="example_video_orig" class="video-js vjs-default-skin" controls preload="none" width="320" height="180" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup='{"example_option":true}'>
+      <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+  </video>
+
+  <h3>Clipped Video</h3>
   <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="320" height="180" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup='{"example_option":true}'>
       <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
   </video>
-  <p>Starts at 5 seconds and stops at 25 seconds, seeking out of the bar will restart playing from 5th second. A bit buggy at the moment.</p>
+  <p>Starts at 5 seconds and stops at 25 seconds, seeking out of the bar will restart playing from 5th second.</p>
+  <script src="rangeplay.videojs.js"></script>
   <script src="custom-player.js"></script>
 </body>
 </html>
